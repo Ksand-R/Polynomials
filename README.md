@@ -1,2 +1,2 @@
 # Polynomials
-A laboratory work ¹4
+A laboratory work #4
