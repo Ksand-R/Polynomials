@@ -13,18 +13,37 @@ private:
 public:
 
 	Polynomial() { size = 0; head = tail = NULL; }
+	
+	
+	Polynomial(const Polynomial& p) {
+		size = p.size;
+		head = p.head;
+		tail = p.tail;
+		Monom* temp = head;
+			while (temp)
+			{
+				Monom* new_node = new Monom(temp->coef, temp->deg, temp->next);
+				temp = temp->next;
+
+			}
+
+
+	}
+
+	//need to overload =
+
 
 	void Print_poly() {
 		Monom* temp = head;
 
-		while (head) {
+		while (temp) {
 			cout << temp->coef << "x^" 
 				<< temp->deg / 10000 << "y^" 
 				<< temp->deg / 100 % 100 << "z^" 
 				<< temp->deg % 100;
 
-			if ( (temp->next) && (temp->coef > 0) ) {
-				printf("+");
+			if ( (temp->next) && (temp->next->coef > 0) ) {
+				printf(" + ");
 			}
 
 			temp = temp->next;
@@ -65,11 +84,13 @@ public:
 			{
 				head = tail = new_node;
 				tail->next = NULL;
+				size = 1;
 			}
 			else {
 				tail->next = new_node;
 				tail = new_node;
 				size++;
+				//tail->next = NULL;
 			}
 			cout << "Is Input ended? // 0 means no, 1 means yes " << endl;
 			cin >> f;
@@ -83,6 +104,7 @@ public:
 	//Polynomial operator * (Monom m);
 
 	~Polynomial() {
+
 	}
 
 };
