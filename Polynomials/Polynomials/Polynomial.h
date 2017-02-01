@@ -77,50 +77,75 @@ public:
 
 		}
 	}
-	//нужна реализаци€ Ќќ–ћјЋ№Ќќ√ќ конструктора копировани€!
+
 	//Polynomial operator - (Monom m);
 	Polynomial operator + (Polynomial p) {
-		Polynomial poly, poly_p = p;
-		Monom *pointer_poly1 = head, *pointer_poly2 = poly_p.head, *buf1 = 0 , *buf2 = poly_p.head;
+		Polynomial poly, poly_copy = p;
+		Monom *pointer_poly1 = head, *pointer_poly2 = poly_copy.head, *buf1, *buf2;
 		if (head == 0){
-			if (p.head != 0) {
-				poly = p;
-			}
+			poly = p;
 		}
 		else {
-			poly.head = new Monom;
-			poly.tail = poly.head;
-			poly.tail->next = 0;
-			int flag = 1;
-			while (pointer_poly1 != 0)
-			{
-				while ( pointer_poly2 != 0 && flag == 1) {
-					*buf1 = 0;
-					*buf2 = poly_p.head;
-					if (head->deg == p.head->deg) { // ищу с похожей стпенью и складываю, из копии второго полинома удал€ю этот моном
-						flag = 0;
-						size++;
-						*poly.head = *pointer_poly2 + *pointer_poly1; // либо + нормально написать пр€мо тут, либо перегрузить + дл€ монома
-						buf1 = pointer_poly2;
-						pointer_poly2 = pointer_poly2->next;
-						delete buf2;
-						buf2 = pointer_poly2;
-					}
-					else {
-						buf1 = pointer_poly2;
-						pointer_poly2 = pointer_poly2->next;
-						buf2 = pointer_poly2;
-					}
-				}
-				if (flag == 1) {
-					*poly.head = *pointer_poly1;
-				}
-				buf1 = new Monom;
-				buf1->next = poly.head;
-				poly.head = buf1;
+			if (p.head == 0) {
+				poly = *this;
 			}
-			if (pointer_poly2 != 0) {
-				//остатки копии второго полинома нужно прицепить к poly
+			else {
+				poly.head = new Monom;
+				poly.tail = poly.head;
+				poly.tail->next = 0;
+				while (pointer_poly1 != 0)
+				{
+					int flag = 1;
+					while (pointer_poly2 != 0 || flag == 1) {
+						buf1 = 0;
+						buf2 = pointer_poly2;
+						if (pointer_poly2->deg == pointer_poly1->deg) {
+							size++;
+							poly.head->coef = pointer_poly2->coef + pointer_poly1->coef;
+							if (flag = 1) {
+								poly.head->coef = pointer_poly2->coef + pointer_poly1->coef;
+								flag = 0;
+							}
+							else {
+								poly.head->coef += pointer_poly2->coef;
+							}
+							if (pointer_poly2->next == 0) {
+								poly_copy.tail = buf1;
+							}
+							if (buf1 != 0) {
+								buf1->next = pointer_poly2->next;
+							}
+							else {
+								poly_copy.head = pointer_poly2->next;
+							}
+							delete buf2;
+							pointer_poly2 = pointer_poly2->next;
+							buf2 = pointer_poly2;
+						}
+						else {
+							buf1 = pointer_poly2;
+							pointer_poly2 = pointer_poly2->next;
+							buf2 = pointer_poly2;
+						}
+					}
+					if (flag == 1) {
+						size++;
+						poly.head->coef = pointer_poly1->coef;
+					}
+					buf1 = new Monom;
+					buf1->next = poly.head;
+					poly.head = buf1;
+
+					pointer_poly1 = pointer_poly1->next;
+				}
+				buf2 = buf1;
+				buf1 = poly.head;
+				poly.head = buf2;
+				delete buf1;
+				if (pointer_poly2 != 0) {
+					poly_copy.tail->next = poly.head;
+					poly.head = poly_copy.head;
+				}
 			}
 		}
 	}
