@@ -78,9 +78,44 @@ public:
 		}
 	}
 
-	//Polynomial operator - (Monom m);
+	Polynomial operator - (Polynomial m) {
+		return *this + m*(-1);
+	}
+
+	Polynomial operator + (Monom m) {
+		Polynomial res = *this;
+		int flag = 0;
+		Monom *pointer = res.head;
+		while (pointer && flag == 0) {
+			if (pointer->deg = m.deg) {
+				pointer->coef += m.coef;
+				flag = 1;
+			}
+			pointer = pointer->next;
+		}
+		if (flag = 0) {
+			res.size++;
+			res.tail->next = new Monom;
+			res.tail = res.tail->next;
+			res.tail->coef = m.coef;
+			res.tail->deg = m.deg;
+			res.tail->next = 0;
+		}
+		return res;
+	}
+
 	Polynomial operator + (Polynomial p) {
-		Polynomial poly, poly_copy = p;
+		if (this == &p) {
+			return p * 2;
+		}
+		Monom *buf = p.head;
+		Polynomial res = *this;
+		while (buf) {
+			res = res + *buf;
+			buf = buf->next;
+		}
+		return res;
+	/*	Polynomial poly, poly_copy = p;
 		Monom *pointer_poly1 = head, *pointer_poly2 = poly_copy.head, *buf1, *buf2;
 		if (head == 0){
 			poly = p;
@@ -100,7 +135,7 @@ public:
 						buf1 = 0;
 						buf2 = pointer_poly2;
 						if (pointer_poly2->deg == pointer_poly1->deg) {
-							size++;
+							poly.size++;
 							poly.head->coef = pointer_poly2->coef + pointer_poly1->coef;
 							if (flag = 1) {
 								poly.head->coef = pointer_poly2->coef + pointer_poly1->coef;
@@ -129,7 +164,7 @@ public:
 						}
 					}
 					if (flag == 1) {
-						size++;
+						poly.size++;
 						poly.head->coef = pointer_poly1->coef;
 					}
 					buf1 = new Monom;
@@ -148,8 +183,41 @@ public:
 				}
 			}
 		}
+		return poly;*/
 	}
-	//Polynomial operator * (Monom m);
+
+	Polynomial operator * (double d) {
+		Polynomial res = *this;
+		Monom *buf = res.head;
+		while (buf) {
+			buf->coef *= d;
+			buf = buf->next;
+		}
+		return res;
+	}
+
+	Polynomial operator * (Monom m) {
+		if (this == 0 || m.coef == 0) {
+			return *this * 0;
+		}
+		Polynomial res = *this;
+		Monom *pointer = res.head;
+		while (pointer ) {
+			pointer->coef *= m.coef;
+			pointer->deg + m.deg;
+			pointer = pointer->next;
+		}
+	}
+
+	Polynomial operator * (Polynomial m) {
+		Polynomial res;
+		Monom *buf = m.head;
+		while (buf) {
+			res = res + (*this * *buf);
+			buf = buf->next;
+		}
+		return res;
+	}
 
 	~Polynomial() {
 	}
