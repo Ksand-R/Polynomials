@@ -1,7 +1,10 @@
 #include <gtest.h>
-int main(int argc, char **argv) {
+#include "Polynomial.h"
+int main(int argc, char **argv) {/*::testing::InitGoogleTest(&argc, argv);*/
 
-	::testing::InitGoogleTest(&argc, argv);
-	return RUN_ALL_TESTS();
+	Polynomial m1;
+	m1.Input_poly();
+	
+	//return RUN_ALL_TESTS();
 	return 0;
 }
