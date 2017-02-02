@@ -17,7 +17,7 @@ public:
 	void Print_poly() {
 		Monom* temp = head;
 
-		while (head) {
+		while (temp) {
 			cout << temp->coef << "x^" 
 				<< temp->deg / 10000 << "y^" 
 				<< temp->deg / 100 % 100 << "z^" 
