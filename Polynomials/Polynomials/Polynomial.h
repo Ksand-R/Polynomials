@@ -99,6 +99,25 @@ public:
 		}
 	}
 
+	Polynomial& operator = (const Polynomial p) {
+		if (this == &p) {
+			return *this;
+		}
+		size = p.size;
+		head = p.head;
+		tail = p.tail;
+		Monom* temp = head;
+		while (temp)
+		{
+			Monom* new_node = new Monom(temp->coef, temp->deg, temp->next);
+			temp = temp->next;
+
+		}
+		delete temp; // Is it needed?
+
+	}
+
+
 	Polynomial operator - (Polynomial m) {
 		return *this + m*(-1);
 	}
