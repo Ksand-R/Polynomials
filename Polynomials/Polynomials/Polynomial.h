@@ -103,18 +103,24 @@ public:
 		if (this == &p) {
 			return *this;
 		}
-		size = p.size;
-		head = p.head;
-		tail = p.tail;
-		Monom* temp = head;
+		
+		while (head)
+		{
+			Monom* temp = head->next;
+			delete head;
+			head = temp;
+			size--;
+		}
+
+		Monom* temp = p.head;
 		while (temp)
 		{
 			Monom* new_node = new Monom(temp->coef, temp->deg, temp->next);
 			temp = temp->next;
 
 		}
-		delete temp; // Is it needed?
-
+		
+		return *this;
 	}
 
 
@@ -191,7 +197,13 @@ public:
 	}
 
 	~Polynomial() {
-
+		while (head)
+		{
+			Monom* temp = head->next;
+			delete head;
+			head = temp;
+			size--;
+		}
 	}
 
 };
