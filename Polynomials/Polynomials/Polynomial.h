@@ -103,19 +103,30 @@ public:
 		if (this == &p) {
 			return *this;
 		}
-		
+
 		while (head)
 		{
 			Monom* temp = head->next;
 			delete head;
 			head = temp;
-			size--;
 		}
 
-		Monom* temp = p.head;
+		Monom* head = new Monom(p.head->coef, p.head->deg, p.head->next);
+		Monom* tail = head;// (p.tail->coef, p.tail->deg, p.tail->next);
+		tail->next = NULL;
+	
+		size = 1;
+
+		Monom* temp = head; // mb temp = p.head
 		while (temp)
 		{
+
 			Monom* new_node = new Monom(temp->coef, temp->deg, temp->next);
+			size++;
+			
+			tail->next = new_node;
+			tail = new_node;
+
 			temp = temp->next;
 
 		}
