@@ -17,21 +17,28 @@ public:
 	
 	Polynomial(const Polynomial& p) {
 		size = p.size;
-		head = p.head;
-		tail = p.tail;
-		Monom* temp = head;
-			while (temp)
-			{
-				Monom* new_node = new Monom(temp->coef, temp->deg, temp->next);
-				temp = temp->next;
+		head = new Monom (p.head->coef, p.head->deg, p.head->next);
+		tail = head;
+		tail->next = NULL;
+		size = 1;
 
-			}
+		Monom*  temp = p.head->next;
+		while (temp)
+		{
+
+			Monom* new_node = new Monom(temp->coef, temp->deg, temp->next);
+			size++;
+
+			tail->next = new_node;
+			tail = new_node;
+
+			temp = temp->next;
+
+		}
 
 
 	}
-
-	//need to overload =
-
+	
 
 	void Print_poly() {
 		Monom* temp = head;
@@ -99,7 +106,7 @@ public:
 		}
 	}
 
-	Polynomial& operator = (const Polynomial p) {
+	const Polynomial& operator = (const Polynomial &p) {
 		if (this == &p) {
 			return *this;
 		}
@@ -144,7 +151,7 @@ public:
 		int flag = 0;
 		Monom *pointer = res.head;
 		while (pointer && flag == 0) {
-			if (pointer->deg = m.deg) {
+			if (pointer->deg == m.deg) {
 				pointer->coef += m.coef;
 				flag = 1;
 			}
@@ -168,7 +175,7 @@ public:
 		Monom *tmp_ptr = p.head;
 		Polynomial res = *this;
 		while (tmp_ptr) {
-			res = res + *tmp_ptr;
+			res = (res + *tmp_ptr);
 			tmp_ptr = tmp_ptr->next;
 		}
 		return res;
