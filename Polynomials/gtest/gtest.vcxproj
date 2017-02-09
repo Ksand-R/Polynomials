@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{5E4141C1-EA25-4540-AD01-1E609C722432}</ProjectGuid>
+    <ProjectGuid>{1F8E9844-D022-4D6D-8482-E2792247844A}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>gtest</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
@@ -134,10 +134,10 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\laba_4\Interprier.git\gtest\gtest-all.cc" />
+    <ClInclude Include="gtest.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\laba_4\Interprier.git\gtest\gtest.h" />
+    <ClCompile Include="gtest-all.cc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
