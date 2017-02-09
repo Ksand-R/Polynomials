@@ -111,13 +111,13 @@ public:
 			head = temp;
 		}
 
-		Monom* head = new Monom(p.head->coef, p.head->deg, p.head->next);
-		Monom* tail = head;// (p.tail->coef, p.tail->deg, p.tail->next);
+		head = new Monom(p.head->coef, p.head->deg, p.head->next);
+		tail = head;// (p.tail->coef, p.tail->deg, p.tail->next);
 		tail->next = NULL;
 	
 		size = 1;
 
-		Monom* temp = head; // mb temp = p.head
+		Monom*  temp = p.head->next;
 		while (temp)
 		{
 

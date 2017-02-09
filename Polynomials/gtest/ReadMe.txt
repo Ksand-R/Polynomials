@@ -1,29 +1,21 @@
-========================================================================
-    STATIC LIBRARY : gtest Project Overview
+﻿========================================================================
+    СТАТИЧЕСКАЯ БИБЛИОТЕКА. Обзор проекта gtest
 ========================================================================
 
-AppWizard has created this gtest library project for you.
+Этот проект библиотеки gtest создан автоматически с помощью мастера приложений.
 
-No source files were created as part of your project.
+В составе проекта не созданы исходные файлы.
 
 
 gtest.vcxproj
-    This is the main project file for VC++ projects generated using an Application Wizard.
-    It contains information about the version of Visual C++ that generated the file, and
-    information about the platforms, configurations, and project features selected with the
-    Application Wizard.
+    Это основной файл проекта VC++, создаваемый с помощью мастера приложений. Он содержит данные о версии языка Visual C++, использованной для создания файла, а также сведения о платформах, конфигурациях и функциях проекта, выбранных с помощью мастера приложений.
 
 gtest.vcxproj.filters
-    This is the filters file for VC++ projects generated using an Application Wizard. 
-    It contains information about the association between the files in your project 
-    and the filters. This association is used in the IDE to show grouping of files with
-    similar extensions under a specific node (for e.g. ".cpp" files are associated with the
-    "Source Files" filter).
+    Это файл фильтров для проектов VC++, созданный с помощью мастера приложений. Он содержит сведения о сопоставлениях между файлами в вашем проекте и фильтрами. Эти сопоставления используются в среде IDE для группировки файлов с одинаковыми расширениями в одном узле (например CPP-файлы сопоставляются с фильтром "Исходные файлы").
 
 /////////////////////////////////////////////////////////////////////////////
-Other notes:
+Прочие примечания.
 
-AppWizard uses "TODO:" comments to indicate parts of the source code you
-should add to or customize.
+С помощью комментариев «TODO:» в мастере приложений обозначаются фрагменты исходного кода, которые необходимо дополнить или изменить.
 
 /////////////////////////////////////////////////////////////////////////////
