@@ -10,6 +10,27 @@ private:
 	Monom* tail;
 	int size; // counter of amount of monoms
 
+	void del_monom(Monom *m) {
+		Monom *ptr = this->head;
+		while (ptr->next != m) {}
+		ptr->next = m->next;
+		delete m;
+	}
+
+	void reduction() {
+		Monom *ptr1 = this->head, *ptr2 = this->head->next;
+		while (ptr1) {
+			while (ptr2) {
+				if (ptr1->deg == ptr2->deg) {
+					ptr1->coef += ptr2->coef;
+					this->del_monom(ptr2);
+				}
+				ptr2 = ptr2->next;
+			}
+			ptr1 = ptr1->next;
+		}
+	}
+
 public:
 
 	Polynomial() { size = 0; head = tail = NULL; }
@@ -22,7 +43,7 @@ public:
 		tail->next = NULL;
 		size = 1;
 
-		Monom*  temp = p.head->next;
+		Monom*  temp = p.head->next;  
 		while (temp)
 		{
 
@@ -104,6 +125,8 @@ public:
 			
 
 		}
+		tail->next = NULL;
+		this->reduction();
 	}
 
 	const Polynomial& operator = (const Polynomial &p) {
@@ -191,7 +214,7 @@ public:
 		return res;
 	}
 
-	Polynomial operator * (Monom m) {
+	Polynomial operator * (Monom &m) {
 		if (this == 0 || m.coef == 0) {
 			return *this * 0;
 		}
@@ -201,7 +224,8 @@ public:
 			pointer->coef *= m.coef;
 			pointer->deg + m.deg;
 			pointer = pointer->next;
-		}
+		}//ÄÅÊÀÍÀÒ
+		return res;
 	}
 
 	Polynomial operator * (Polynomial m) {
