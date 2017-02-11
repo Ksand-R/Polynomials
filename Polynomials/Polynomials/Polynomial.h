@@ -40,15 +40,15 @@ public:
 		size = p.size;
 		head = new Monom (p.head->coef, p.head->deg, p.head->next);
 		tail = head;
-		//tail->next = NULL;
-		size = p.size;
+		tail->next = NULL;
+		size = 1;
 
-		Monom*  temp = p.head->next;
+		Monom*  temp = p.head->next;  
 		while (temp)
 		{
 
-			Monom *new_node = new Monom(temp->coef, temp->deg, temp->next);
-			//size++;
+			Monom* new_node = new Monom(temp->coef, temp->deg, temp->next);
+			size++;
 
 			tail->next = new_node;
 			tail = new_node;
@@ -129,7 +129,7 @@ public:
 		this->reduction();
 	}
 
-	Polynomial& operator = (Polynomial &p) {
+	const Polynomial& operator = (const Polynomial &p) {
 		if (this == &p) {
 			return *this;
 		}
@@ -165,11 +165,11 @@ public:
 	}
 
 
-	Polynomial operator - (Polynomial &m) {
+	Polynomial operator - (Polynomial m) {
 		return *this + m*(-1);
 	}
 
-	Polynomial operator + (Monom &m) {
+	Polynomial operator + (Monom m) {
 		Polynomial res = *this;
 		int flag = 0;
 		Monom *pointer = res.head;
@@ -180,7 +180,7 @@ public:
 			}
 			pointer = pointer->next;
 		}
-		if (flag == 0) {
+		if (flag = 0) {
 			res.size++;
 			res.tail->next = new Monom;
 			res.tail = res.tail->next;
@@ -191,7 +191,7 @@ public:
 		return res;
 	}
 
-	Polynomial operator + (Polynomial &p) {
+	Polynomial operator + (Polynomial p) {
 		if (this == &p) {
 			return p * 2;
 		}
@@ -214,25 +214,23 @@ public:
 		return res;
 	}
 
-	Polynomial operator * (Monom m) {
+	Polynomial operator * (Monom &m) {
 		if (this == 0 || m.coef == 0) {
 			return *this * 0;
 		}
 		Polynomial res = *this;
 		Monom *pointer = res.head;
-		while (pointer) {
+		while (pointer ) {
 			pointer->coef *= m.coef;
-			pointer->deg += m.deg;		 //test on deg<=99
+			pointer->deg + m.deg;
 			pointer = pointer->next;
-		}
+		}//ÄÅÊÀÍÀÒ
 		return res;
 	}
 
 	Polynomial operator * (Polynomial m) {
 		Polynomial res;
 		Monom *buf = m.head;
-		res = *this * *buf;			// all (vesde) add test on bad polynomial
-		buf = buf->next;
 		while (buf) {
 			res = res + (*this * *buf);
 			buf = buf->next;
