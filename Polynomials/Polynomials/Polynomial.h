@@ -24,6 +24,7 @@ private:
 				if (ptr1->deg == ptr2->deg) {
 					ptr1->coef += ptr2->coef;
 					this->del_monom(ptr2);
+					//ptr2= ptr2->next?
 				}
 				ptr2 = ptr2->next;
 			}
@@ -224,7 +225,7 @@ public:
 			pointer->coef *= m.coef;
 			pointer->deg + m.deg;
 			pointer = pointer->next;
-		}//ДЕКАНАТ
+		}
 		return res;
 	}
 
@@ -249,4 +250,4 @@ public:
 	}
 
 };
-//удалить звено
+
