@@ -22,7 +22,7 @@ public:
 		tail->next = NULL;
 		size = 1;
 
-		Monom*  temp = p.head->next;
+		Monom*  temp = p.head->next;  
 		while (temp)
 		{
 
@@ -191,7 +191,7 @@ public:
 		return res;
 	}
 
-	Polynomial operator * (Monom m) {
+	Polynomial operator * (Monom &m) {
 		if (this == 0 || m.coef == 0) {
 			return *this * 0;
 		}
@@ -201,7 +201,8 @@ public:
 			pointer->coef *= m.coef;
 			pointer->deg + m.deg;
 			pointer = pointer->next;
-		}
+		}//ÄÅÊÀÍÀÒ
+		return *res;
 	}
 
 	Polynomial operator * (Polynomial m) {
