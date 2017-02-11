@@ -26,10 +26,14 @@ private:
 					Monom *buf = ptr2->next;
 					ptr1->coef += ptr2->coef;
 					this->del_monom(ptr2);
+<<<<<<< HEAD
+					//ptr2= ptr2->next?
+=======
 					ptr2 = buf;
 				}
 				else {
 					ptr2 = ptr2->next;
+>>>>>>> origin/master
 				}
 			}
 			ptr1 = ptr1->next;
@@ -257,4 +261,4 @@ public:
 	}
 
 };
-//удалить звено
+
