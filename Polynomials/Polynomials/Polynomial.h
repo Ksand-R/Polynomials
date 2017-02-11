@@ -18,14 +18,19 @@ private:
 	}
 
 	void reduction() {
-		Monom *ptr1 = this->head, *ptr2 = this->head->next;
-		while (ptr1) {
-			while (ptr2) {
+		Monom *ptr1 = this->head, *ptr2;
+		while (ptr1) { 
+		ptr2 = ptr1->next;
+		while (ptr2) {
 				if (ptr1->deg == ptr2->deg) {
+					Monom *buf = ptr2->next;
 					ptr1->coef += ptr2->coef;
 					this->del_monom(ptr2);
+					ptr2 = buf;
 				}
-				ptr2 = ptr2->next;
+				else {
+					ptr2 = ptr2->next;
+				}
 			}
 			ptr1 = ptr1->next;
 		}
@@ -125,7 +130,7 @@ public:
 			
 
 		}
-		tail->next = NULL;
+		//tail->next = NULL;
 		this->reduction();
 	}
 
@@ -214,29 +219,32 @@ public:
 		return res;
 	}
 
-	Polynomial operator * (Monom &m) {
+	Polynomial operator * (Monom m) {
 		if (this == 0 || m.coef == 0) {
 			return *this * 0;
 		}
 		Polynomial res = *this;
 		Monom *pointer = res.head;
-		while (pointer ) {
+		while (pointer) {
 			pointer->coef *= m.coef;
-			pointer->deg + m.deg;
+			pointer->deg += m.deg;		 //test on deg<=99
 			pointer = pointer->next;
-		}//ÄÅÊÀÍÀÒ
+		}
 		return res;
 	}
 
 	Polynomial operator * (Polynomial m) {
 		Polynomial res;
 		Monom *buf = m.head;
+		res = *this * *buf;			// eweywhere add test on bad polynomial
+		buf = buf->next;
 		while (buf) {
 			res = res + (*this * *buf);
 			buf = buf->next;
 		}
 		return res;
 	}
+
 
 	~Polynomial() {
 		while (head)
