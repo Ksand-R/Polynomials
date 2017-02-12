@@ -3,6 +3,7 @@
 #include "Monom.h"
 using namespace std;
 
+//Minus works uncorrectly
 
 class Polynomial {
 private:
@@ -16,8 +17,9 @@ private:
 		ptr->next = m->next;
 		delete m;
 	}
+	void set_head(Monom* head_) { head = head_; }
 
-	void reduction() {
+	void bring_similar() {
 		Monom *ptr1 = this->head, *ptr2;
 		while (ptr1) { 
 		ptr2 = ptr1->next;
@@ -71,15 +73,26 @@ public:
 		Monom* temp = head;
 
 		while (temp) {
-			cout << temp->coef << "x^" 
-				<< temp->deg / 10000 << "y^" 
-				<< temp->deg / 100 % 100 << "z^" 
-				<< temp->deg % 100;
+			if (temp->coef == 0) { cout << '0'; break; }
+			else {
+				cout << temp->coef;
+				if (temp->deg / 10000)
+				{
+					cout << "x^" << temp->deg / 10000;
+				}
+				if (temp->deg / 100 % 100)
+				{
+					cout << "y^" << temp->deg / 100 % 100;
+				}
+				if (temp->deg % 100)
+				{
+					cout << "z^" << temp->deg % 100;
+				}
 
-			if ( (temp->next) && (temp->next->coef > 0) ) {
-				printf(" + ");
+				if ((temp->next) && (temp->next->coef > 0)) {
+					printf(" + ");
+				}
 			}
-
 			temp = temp->next;
 		}
 	}
@@ -95,7 +108,7 @@ public:
 		
 		while (f != 1) {
 			Monom* new_node = new Monom();
-
+			// need to rework input, i mean control validity 
 			cout << "Enter another coefficient: " << endl;
 			cin >> curr_coef;
 			new_node->coef = curr_coef;
@@ -124,7 +137,7 @@ public:
 				tail->next = new_node;
 				tail = new_node;
 				size++;
-				//tail->next = NULL;
+
 			}
 			cout << "Is Input ended? // 0 means no, 1 means yes " << endl;
 			cin >> f;
@@ -132,7 +145,7 @@ public:
 
 		}
 		//tail->next = NULL;
-		this->reduction();
+		this->bring_similar();
 	}
 
 	const Polynomial& operator = (const Polynomial &p) {
@@ -148,7 +161,7 @@ public:
 		}
 
 		head = new Monom(p.head->coef, p.head->deg, p.head->next);
-		tail = head;// (p.tail->coef, p.tail->deg, p.tail->next);
+		tail = head;
 		tail->next = NULL;
 	
 		size = 1;
@@ -228,7 +241,13 @@ public:
 		Monom *pointer = res.head;
 		while (pointer) {
 			pointer->coef *= m.coef;
-			pointer->deg += m.deg;		 //test on deg<=99
+			if (pointer->deg + m.deg > 999999) { 
+				throw std::logic_error("Deg overflow");
+				break;
+			}
+			else {
+				pointer->deg += m.deg;
+			}	 //test on deg<=99
 			pointer = pointer->next;
 		}
 		return res;
@@ -237,6 +256,7 @@ public:
 	Polynomial operator * (Polynomial m) {
 		Polynomial res;
 		Monom *buf = m.head;
+
 		res = *this * *buf;			// eweywhere add test on bad polynomial
 		buf = buf->next;
 		while (buf) {
