@@ -37,3 +37,13 @@ TEST(TPolyn, can_create_polynom) {
 	//Nessesery to realize init_const
 	ADD_FAILURE();
 }
+
+TEST(TPolyn, mult_with_chisl) {
+	Polynomial p;
+	Monom m1(-2.11, 10100, NULL);
+	Monom m2(-22.11, 102100, NULL);
+	//Monom m3(-2.11, 1102100, NULL);
+
+	//Nessesery to realize init_const
+	ADD_FAILURE();
+}
