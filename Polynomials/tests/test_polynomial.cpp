@@ -37,10 +37,47 @@ TEST(TPolyn, can_mult_on_chisl) {
 	Polynomial p1;
 	Monom m2(-4.22, 10100, NULL);
 
+
 	p.add_monom_in_tail(&m1);
+	p1.add_monom_in_tail(&m2);
 	Polynomial res = p * 2;
-	//Nessesery to OVERLOAD ==
-	//ASSERT_EQ(res.coef == -4.22);
-	ADD_FAILURE();
+		ASSERT_EQ(res, p1);
+
+
+
+}
+
+
+
+TEST(TPolyn, can_mult_two_polynoms) {
+	Polynomial p;
+	Monom m1(-2.11, 10100, NULL);
+	Polynomial p1;
+	Monom m2(-4.22, 10100, NULL);
+
+
+	p.add_monom_in_tail(&m1);
+	p1.add_monom_in_tail(&m2);
+
+	Polynomial res = p * p1;
+	Polynomial res1;
+	Monom m3(8.9042, 20200, NULL);
+	res1.add_monom_in_tail(&m3);
+	ASSERT_EQ(res, res1);	
+}
+
+
+TEST(TPolyn, can_substract_two_polynoms) {
+	Polynomial p;
+	Monom m1(-2.11, 10100, NULL);
+	Polynomial p1;
+	Monom m2(-2.11, 10100, NULL);
+	Polynomial res;
+
+
+	p.add_monom_in_tail(&m1);
+	p1.add_monom_in_tail(&m2);
+
+	ASSERT_EQ(res, p - p1);
 
 }

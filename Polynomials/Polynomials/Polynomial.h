@@ -307,7 +307,7 @@ public:
 			}
 			else {
 				pointer->deg += m.deg;
-			}	 //test on deg<=99
+			}
 			pointer = pointer->next;
 		}
 		return res;
@@ -317,7 +317,7 @@ public:
 		Polynomial res;
 		Monom *buf = m.head;
 
-		res = *this * *buf;			// eweywhere add test on bad polynomial
+		res = *this * *buf;			
 		buf = buf->next;
 		while (buf) {
 			res = res + (*this * *buf);
@@ -418,7 +418,7 @@ public:
 			tail = head = new_monom;
 			size++;
 		}
-		else {
+		else {	
 			Monom* new_monom = new Monom(m->coef, m->deg, NULL);
 			tail->next = new_monom;
 			tail = new_monom;
@@ -427,9 +427,19 @@ public:
 	}
 
 
-	bool operator == (const Polynomial &left) {
-		return 0;
-}
+	bool Polynomial::operator==(const Polynomial& rhs) const {
+		Monom* temp1 = this->head;
+		Monom* temp2 = rhs.head;
+		while (temp1 && temp2) {
+			if (*temp1 != *temp2) { return false;}
+
+			temp1 = temp1->next;
+			temp2 = temp2->next;
+		
+	}
+		return true;			
+	}
+
 
 
 	~Polynomial() {

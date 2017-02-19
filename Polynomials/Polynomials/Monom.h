@@ -20,4 +20,15 @@
 			}
 		}
 
+		bool Monom::operator==(const Monom& rhs) const {
+			return (this->coef == rhs.coef && this->deg == rhs.deg );
+		}
+
+		bool Monom::operator!=(const Monom& rhs) const {
+			if (*this == rhs)
+			{
+				return false;
+			}
+			else { return true; }
+		}	
 	};
