@@ -112,17 +112,17 @@ public:
 		int curr_y = -1;
 		int curr_z = -1;
 		
+		
 		while (f != 1) {
-			Monom* new_node = new Monom();
-			// need to rework input, i mean control 
-
-			
+			Monom* new_node = new Monom(); 
+			//add exit
+			//crashed 1/0
 			for (;;) {
 				cout << "Enter another coefficient: " << endl;
 				cin >> curr_coef;
-				if (std::cin.fail())
+				if (std::cin.fail() || curr_coef < 0)
 				{
-					std::cout << "Nepravilnii vvod - zapreshen vvod bykv" << '\n';
+					std::cout << "Invalid input, repeat" << '\n';
 					std::cin.clear();
 					std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 				}
@@ -133,30 +133,50 @@ public:
 			}
 				
 			
-
-			cout << "enter enother degree of x: " << endl;
-			cin >> curr_x;
-			if (std::cin.fail())
-			{
-				std::cout << "Nepravilnii vvod - zapreshen vvod bykv" << '\n';
-				std::cin.clear();
-				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			for (;;) {
+				cout << "enter another degree of x: " << endl;
+				cin >> curr_x;
+				if (std::cin.fail() || curr_coef < 0)
+				{
+					std::cout << "Invalid input, repeat" << '\n';
+					std::cin.clear();
+					std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+				}
+				else {
+					new_node->deg = curr_x * 10000;
+					break;
+				}
 			}
-			new_node->deg = curr_x * 10000;
 
-			cout << "enter enother degree of y: " << endl;
-			cin >> curr_y;
-			if (std::cin.fail())
-			{
-				std::cout << "Nepravilnii vvod - zapreshen vvod bykv" << '\n';
-				std::cin.clear();
-				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			for(;;){
+				cout << "enter another degree of y: " << endl;
+				cin >> curr_y;
+				if (std::cin.fail() || curr_coef < 0)
+				{
+					std::cout << "Invalid input, repeat" << '\n';
+					std::cin.clear();
+					std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+				}
+				else{
+					new_node->deg += curr_y * 100;
+					break;
+				}
 			}
-			new_node->deg += curr_y * 100;
 
-			cout << "enter enother degree of z: " << endl;
-			scanf_s("%i", &curr_z);
-			new_node->deg += curr_z;
+			for (;;) {
+				cout << "enter another degree of z: " << endl;
+				cin >> curr_z;
+				if (std::cin.fail() || curr_coef < 0)
+				{
+					std::cout << "Invalid input, repeat" << '\n';
+					std::cin.clear();
+					std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+				}
+				else{
+					new_node->deg += curr_z;
+					break;
+				}
+			}
 
 			new_node->next = NULL;
 
@@ -173,7 +193,7 @@ public:
 
 			}
 			cout << "Is Input ended? // 0 means no, 1 means yes " << endl;
-			scanf_s("%i", &f);
+			cin >> f;
 			
 
 		}
@@ -221,28 +241,6 @@ public:
 	Polynomial operator - (Polynomial m) {
 		return *this + m*(-1);
 	}
-
-	//Polynomial operator + (Monom m) {
-	//	Polynomial res = *this;
-	//	int flag = 0;
-	//	Monom *pointer = res.head;
-	//	while (pointer && flag == 0) {
-	//		if (pointer->deg == m.deg) {
-	//			pointer->coef += m.coef;
-	//			flag = 1;
-	//		}
-	//		pointer = pointer->next;
-	//	}
-	//	if (flag = 0) {
-	//		res.size++;
-	//		res.tail->next = new Monom;
-	//		res.tail = res.tail->next;
-	//		res.tail->coef = m.coef;
-	//		res.tail->deg = m.deg;
-	//		res.tail->next = 0;
-	//	}
-	//	return res;
-	//}
 
 	Polynomial operator + (Polynomial p) {
 		Monom* m1 = this->head;
