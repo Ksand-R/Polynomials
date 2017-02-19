@@ -45,7 +45,7 @@ private:
 
 public:
 
-	Polynomial() { size = 0; head = tail = NULL; }
+	Polynomial() { size = 0; head = tail = new Monom(0, 0, NULL); }
 	
 	
 	Polynomial(const Polynomial& p) {
@@ -75,10 +75,10 @@ public:
 
 	void Print_poly() {
 		Monom* temp = head;
-
+		int flag = 0;
 		while (temp) {
-			if (temp->coef == 0) { cout << '0'; break; }
-			else {
+			if (temp->coef != 0) {
+				flag = 1;
 				cout << temp->coef;
 				if (temp->deg / 10000)
 				{
@@ -92,12 +92,14 @@ public:
 				{
 					cout << "z^" << temp->deg % 100;
 				}
-
-				if ((temp->next) && (temp->next->coef > 0)) {
-					printf(" + ");
-				}
+			}
+			if ((temp->next) && (temp->next->coef > 0) && (temp->coef != 0)) {
+				printf(" + ");
 			}
 			temp = temp->next;
+		}
+		if (flag == 0) {
+			cout << '0';
 		}
 	}
 
@@ -410,7 +412,7 @@ public:
 
 	void add_monom_in_tail( Monom* m)
 	{
-		if (tail == NULL)
+		if (tail->coef == 0)
 		{
 			Monom* new_monom = new Monom(m->coef, m->deg, NULL);
 			tail = head = new_monom;
@@ -426,7 +428,7 @@ public:
 
 
 	~Polynomial() {
-		while (head)
+		while (size != 0)
 		{
 			Monom* temp = head->next;
 			delete head;

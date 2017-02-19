@@ -10,7 +10,7 @@ int main(int argc, char **argv) {::testing::InitGoogleTest(&argc, argv);
 	m2.Input_poly();
 	
 	Polynomial m3;
-	m3 = m1 + m2;
+	m3 = m1 - m2;
 
 	m3.Print_poly();
 //	return RUN_ALL_TESTS();
