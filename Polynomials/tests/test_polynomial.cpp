@@ -1,49 +1,46 @@
 #include <gtest.h>
 #include "Polynomial.h"
 
-TEST(TMonom, can_add_empty_monom)
-{
-	Monom m1;
-	ASSERT_TRUE(m1.coef == 0.0, m1.deg == 0, m1.next == NULL);
+
+
+TEST(TPolyn, can_summ_polynoms) {
+	Polynomial p1;
+	Polynomial p2;
 	
-	
+	Monom m1(-2.11, 10100, NULL);
+	Monom m2(-22.11, 102100, NULL);
+	p1.add_monom_in_tail(&m1);
+	p2.add_monom_in_tail(&m2);
+	Polynomial res = p1 + p2;
+	//Monom m3(-2.11, 1102100, NULL);
+
+	//Nessesery to realize init_const
+	ASSERT_NO_THROW(res);
 }
 
-
-TEST(TMonom, can_add_monom)
-{
-	Monom m2;
-	Monom* ptr = &m2;
-	Monom m1(-2.11, 102100, ptr);
-	ASSERT_TRUE(m1.coef == -2.11);
-	ASSERT_TRUE(m1.deg == 102100);
-	ASSERT_TRUE(m1.next == ptr);
+TEST(TPolyn, can_add_monom_in_polynom) {
+	Monom m1(-2.11, 10100, NULL);
+	Monom m2(-22.11, 102100, NULL);
+	Polynomial p1;
+	p1.add_monom_in_tail(&m1);
+	ASSERT_NO_THROW(p1.add_monom_in_tail(&m2));
 
 }
-
-
-TEST(TMonom, monom_deg_correct)
-{
-	EXPECT_ANY_THROW(Monom m1(-2.11, 1102100, NULL));
-}
-
 
 TEST(TPolyn, can_create_polynom) {
-	Polynomial p;
-	Monom m1(-2.11, 10100, NULL);
-	Monom m2(-22.11, 102100, NULL);
-	//Monom m3(-2.11, 1102100, NULL);
-
-	//Nessesery to realize init_const
-	ADD_FAILURE();
+	ASSERT_NO_THROW(Polynomial p);
 }
 
-TEST(TPolyn, mult_with_chisl) {
+TEST(TPolyn, can_mult_on_chisl) {
 	Polynomial p;
 	Monom m1(-2.11, 10100, NULL);
-	Monom m2(-22.11, 102100, NULL);
-	//Monom m3(-2.11, 1102100, NULL);
+	Polynomial p1;
+	Monom m2(-4.22, 10100, NULL);
 
-	//Nessesery to realize init_const
+	p.add_monom_in_tail(&m1);
+	Polynomial res = p * 2;
+	//Nessesery to OVERLOAD ==
+	//ASSERT_EQ(res.coef == -4.22);
 	ADD_FAILURE();
+
 }

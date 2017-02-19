@@ -79,6 +79,8 @@ public:
 		while (temp) {
 			if (temp->coef != 0) {
 				flag = 1;
+				if (temp->coef == 1) { cout << ""; }
+				else
 				cout << temp->coef;
 				if (temp->deg / 10000)
 				{
@@ -425,6 +427,11 @@ public:
 	}
 
 
+	bool operator == (const Polynomial &left) {
+		return 0;
+}
+
+
 	~Polynomial() {
 		while (size != 0)
 		{
@@ -436,4 +443,3 @@ public:
 	}
 
 };
-
