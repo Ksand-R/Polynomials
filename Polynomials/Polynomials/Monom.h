@@ -8,11 +8,11 @@
 		int deg;
 		Monom* next;
 
-			//Monom(const Monom& m) {
-			//	next = new Monom (*m.next);
-			//	coef = m.coef;
-			//	deg = m.deg;
-			//}
+			Monom(const Monom& m) {
+				next = new Monom (*m.next);
+				coef = m.coef;
+				deg = m.deg;
+			}
 
 
 
