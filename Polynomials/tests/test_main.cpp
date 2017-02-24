@@ -3,16 +3,21 @@
 
 int main(int argc, char **argv) {::testing::InitGoogleTest(&argc, argv);
 
-	//Polynomial m1;
-	//m1.Input_poly();
+	/*Polynomial p1, p2, p3;
+	p1.add_monom_in_tail(new Monom(2.3, 2));
+	p2.add_monom_in_tail(new Monom(2.1, 3));
+	p2.add_monom_in_tail(new Monom(-2.1, 3));	
 
-	//Polynomial m2;
-	//m2.Input_poly();
-	//
-	//Polynomial m3;
-	//m3 = m1 - m2;
+	p2.Input_poly();
 
-	//m3.Print_poly();
+	p3 = p1 * p2;
+	p3.Print_poly();*/
+
+
 	return RUN_ALL_TESTS();
+	//empty output
+	//d * polyn overload
+	//equality
+
 	return 0;
 }
